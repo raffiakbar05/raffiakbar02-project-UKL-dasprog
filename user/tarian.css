@@ -1,0 +1,98 @@
+<style>
+      body {
+        font-family: 'Poppins', sans-serif;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px;
+        background-color: #333;
+      }
+
+      .navbar-logo {
+        color: #fff;
+        font-size: 24px;
+        text-decoration: none;
+      }
+
+      .navbar-logo span {
+        color: #f39c12;
+      }
+
+      .navbar-nav a {
+        color: #fff;
+        margin-left: 20px;
+        text-decoration: none;
+      }
+
+      .navbar-extra a {
+        color: #fff;
+        margin-left: 20px;
+        text-decoration: none;
+      }
+
+      .menu {
+        padding: 50px 20px;
+        background-color:#302c2c ;
+        text-align: center;
+      }
+
+      .menu h2 {
+        font-size: 36px;
+        margin-bottom: 20px;
+      }
+
+      .menu span {
+        color: #f39c12;
+      }
+
+      .row2 {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .menu-card {
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        margin: 20px;
+        max-width: 300px;
+        overflow: hidden;
+        text-align: left;
+      }
+
+      .menu-card img {
+        width: 100%;
+        height: auto;
+      }
+
+      .menu-card-title {
+        padding: 20px;
+        font-size: 16px;
+        color: #333;
+      }
+
+      footer {
+        background-color: #333;
+        color: #fff;
+        text-align: center;
+        padding: 20px 0;
+      }
+
+      footer .links a {
+        color: #f39c12;
+        margin: 0 10px;
+        text-decoration: none;
+      }
+
+      footer .credit a {
+        color: #f39c12;
+        text-decoration: none;
+      }
+    </style>

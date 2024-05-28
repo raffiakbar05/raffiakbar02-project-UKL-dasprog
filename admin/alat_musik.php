@@ -17,37 +17,38 @@
 </div>
         
     <section class="user">
-    <h1 class="heading">Data User</h1>
+    <h1 class="heading">Data Alat Musik</h1>
     <br>
-        <a href="../register.php" class="btn">Tambah User</a>
+        <a href="tambah_alatmusik.php" class="btn">Tambah data</a>
         <br>
         <br>
         <table border="1" class="table">
             <tr>
                 <th>Nomer</th>
-                <th>Id_User</th>
-                <th>Username</th>
-                <th>Password</th>
-                <th>Email</th>
-                <th>Level</th>
-                <th>Action</th> <!-- Membuat kolom data user -->
-                <th>Action</th> <!-- Membuat kolom  data user-->
+                <th>id</th>
+                <th>nama</th>
+                <th>jenis</th>
+                <th>asal</th>
+                <th>aksesoris</th>
+                <th>Aksi</th>
+                <th>Aksi</th>
+
             </tr>
             <?php
             include '../koneksi.php';
-            $query_mysql = mysqli_query($mysqli, "SELECT * FROM user") or die(mysqli_error($mysqli));
+            $query_mysql = mysqli_query($mysqli, "SELECT * FROM alat_musik") or die(mysqli_error($mysqli));
             $nomor = 1;
             while($data = mysqli_fetch_array($query_mysql)) { 
             ?>
             <tr>
                 <td><?php echo $nomor++; ?></td>
-                <td><?php echo $data['id_user']; ?></td>
-                <td><?php echo $data['username']; ?></td>
-                <td><?php echo $data['password']; ?></td>
-                <td><?php echo $data['email']; ?></td>
-                <td><?php echo $data['level']; ?></td>
-                <td><a href="hapususer.php?id=<?php echo $data['id_user']; ?>" class="btn-hapus">Hapus</a> <!-- Tombol hapus --></td>
-                <td><a href="updateuser.php?id=<?php echo $data['id_user']; ?>" class="btn-update">Update</a> <!-- Tombol update --></td>
+                <td><?php echo $data['id']; ?></td>
+                <td><?php echo $data['nama']; ?></td>
+                <td><?php echo $data['jenis']; ?></td>
+                <td><?php echo $data['asal']; ?></td>
+                <td><?php echo $data['aksesoris']; ?></td>
+                <td><a href="hapus_alatmusik.php?id=<?php echo $data['id']; ?>" class="btn-hapus">Hapus</a> <!-- Tombol hapus --></td>
+                <td><a href="update_alatmusik.php?id=<?php echo $data['id']; ?>" class="btn-update">Update</a> <!-- Tombol update --></td>
             </tr>
             <?php } ?>
         </table>

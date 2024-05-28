@@ -17,7 +17,7 @@
 
     <!-- My Style -->
 
-    <link rel="stylesheet" href= "web saya.css" />
+    <link rel="stylesheet" href= "web saya.css">
   </head>
 
   <body>
@@ -30,12 +30,10 @@
         <a href="pakaian adat.php">Pakaian Adat</a>
         <a href="tarian adat.php">Tarian</a>
         <a href="alat musik.php">Alat musik</a>
+        <a href="proses_masukan.php">Masukan</a>
       </div>
 
-      <div class="navbar-extra">
-        <a href="#" id="search"><i data-feather="search"></i></a>
-        <a href="#" id="sosial budaya"><i data-feather="menu"></i></a>
-      </div>
+     
     </nav>
     <!-- Navbar end -->
 
@@ -43,10 +41,7 @@
     <section class="hero" id="home">
       <main class="content">
         <h1>Apa saja yang kamu ketahui tentang Sosial Budaya di <span>Jawa timur</span></h1>
-        <p class="teks">
-          Disini akan menunjukan Sosial budaya yang ada di daerah Jawa Timur
-        </p>
-        <a href="#" class="cta">Lets Go</a>
+        <a href="pakaian adat.php" class="cta">Lets Go</a>
       </main>
     </section>
     <!-- Hero Section end -->
@@ -56,10 +51,11 @@
     <footer>
 
       <div class="links">
-        <a href="#home">Home</a>
-        <a href="#about">Pakaian Adat</a>
-        <a href="#menu">Tarian</a>
-        <a href="#menu">Alat Musik</a>
+        <a href="web saya.php">Home</a>
+        <a href="pakaian adat.php">Pakaian Adat</a>
+        <a href="tarian adat.php">Tarian</a>
+        <a href="alat musik.php">Alat Musik</a>
+        <a href="proses_masukan.php">Masukan</a>
       </div>
 
       <div class="credit">

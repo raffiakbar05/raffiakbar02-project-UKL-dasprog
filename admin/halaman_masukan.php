@@ -17,37 +17,33 @@
 </div>
         
     <section class="user">
-    <h1 class="heading">Data User</h1>
+    <h1 class="heading">Data kritik dan saran</h1>
     <br>
-        <a href="../register.php" class="btn">Tambah User</a>
+        <a href="tambah_masukan.php" class="btn">Tambah data</a>
         <br>
         <br>
         <table border="1" class="table">
             <tr>
                 <th>Nomer</th>
-                <th>Id_User</th>
-                <th>Username</th>
-                <th>Password</th>
+                <th>id</th>
+                <th>Nama</th>
                 <th>Email</th>
-                <th>Level</th>
-                <th>Action</th> <!-- Membuat kolom data user -->
-                <th>Action</th> <!-- Membuat kolom  data user-->
+                <th>Pesan</th>
+                <th>Aksi</th>
             </tr>
             <?php
             include '../koneksi.php';
-            $query_mysql = mysqli_query($mysqli, "SELECT * FROM user") or die(mysqli_error($mysqli));
+            $query_mysql = mysqli_query($mysqli, "SELECT * FROM halaman_masukan") or die(mysqli_error($mysqli));
             $nomor = 1;
             while($data = mysqli_fetch_array($query_mysql)) { 
             ?>
             <tr>
                 <td><?php echo $nomor++; ?></td>
-                <td><?php echo $data['id_user']; ?></td>
-                <td><?php echo $data['username']; ?></td>
-                <td><?php echo $data['password']; ?></td>
+                <td><?php echo $data['IDmasukan']; ?></td>
+                <td><?php echo $data['nama']; ?></td>
                 <td><?php echo $data['email']; ?></td>
-                <td><?php echo $data['level']; ?></td>
-                <td><a href="hapususer.php?id=<?php echo $data['id_user']; ?>" class="btn-hapus">Hapus</a> <!-- Tombol hapus --></td>
-                <td><a href="updateuser.php?id=<?php echo $data['id_user']; ?>" class="btn-update">Update</a> <!-- Tombol update --></td>
+                <td><?php echo $data['pesan']; ?></td>
+                <td><a href="hapus_masukan.php?id=<?php echo $data['IDmasukan']; ?>" class="btn-hapus">Hapus</a> <!-- Tombol hapus --></td>
             </tr>
             <?php } ?>
         </table>
