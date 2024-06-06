@@ -26,7 +26,7 @@
                 $result = mysqli_query($mysqli,
                 "INSERT INTO user(email,username,password,level) VALUES ('$email','$username','$password','user')");
 
-                header("location:index.php");
+                header("location: admin/user.php");
             }
             ?>
         </form>

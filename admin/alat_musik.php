@@ -1,3 +1,10 @@
+<?php
+session_start();
+if (!isset($_SESSION['username']) || $_SESSION['level'] != "admin") {
+    header("Location: ../login.php");
+    exit();
+} ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,54 +16,58 @@
 </head>
 <body>
     <div class="navbar">
-        <a href="user.php">user</a>
-        <a href="pakaian_adat.php">Pakaian adat</a>
+        <a href="user.php">User</a>
+        <a href="pakaian_adat.php">Pakaian Adat</a>
         <a href="tarian.php">Tarian</a>
-        <a href="alat_musik.php">Alat musik</a>
-        <a href="halaman_masukan.php">Masukan</a>
-</div>
+        <a href="alat_musik.php">Alat Musik</a>
+        <a href="sewa.php">Sewa</a>
+    </div>
         
     <section class="user">
-    <h1 class="heading">Data Alat Musik</h1>
+        <h1 class="heading">Data Alat Musik</h1
+        >
+        <div class="button-container">
+         <a href="tambah_alatmusik.php" class="btn tambah-user">Tambah Pakaian</a>
+            <a href="../index.php" class="btn logout">Log Out</a>
+        </div>
     <br>
-        <a href="tambah_alatmusik.php" class="btn">Tambah data</a>
-        <br>
-        <br>
         <table border="1" class="table">
             <tr>
                 <th>Nomer</th>
-                <th>id</th>
-                <th>nama</th>
-                <th>jenis</th>
-                <th>asal</th>
-                <th>aksesoris</th>
+                <th>Nama</th>
+                <th>Tarian Yang Diiringi</th>
+                <th>Gambar</th>
+                <th>Kota</th>
+                <th>Jenis</th>
+                <th>Deskripsi</th>
                 <th>Aksi</th>
                 <th>Aksi</th>
-
             </tr>
             <?php
             include '../koneksi.php';
-            $query_mysql = mysqli_query($mysqli, "SELECT * FROM alat_musik") or die(mysqli_error($mysqli));
+            $query_mysql = mysqli_query($mysqli, "SELECT alat_musik.*, daerah.kota, tarian_adat.nama_tarian
+                                                  FROM alat_musik
+                                                  JOIN daerah ON alat_musik.id_daerah = daerah.id_daerah
+                                                  LEFT JOIN tarian_adat ON alat_musik.id_tarian = tarian_adat.id_tarian") 
+                                                  or die(mysqli_error($mysqli));
             $nomor = 1;
             while($data = mysqli_fetch_array($query_mysql)) { 
             ?>
             <tr>
                 <td><?php echo $nomor++; ?></td>
-                <td><?php echo $data['id']; ?></td>
                 <td><?php echo $data['nama']; ?></td>
+                <td><?php echo isset($data['nama_tarian']) ? $data['nama_tarian'] : 'N/A'; ?></td>
+                <td><img src="uploaded_img/<?php echo $data['gambar']; ?>" alt="" width="100"></td>
+                <td><?php echo $data['kota']; ?></td>
                 <td><?php echo $data['jenis']; ?></td>
-                <td><?php echo $data['asal']; ?></td>
-                <td><?php echo $data['aksesoris']; ?></td>
-                <td><a href="hapus_alatmusik.php?id=<?php echo $data['id']; ?>" class="btn-hapus">Hapus</a> <!-- Tombol hapus --></td>
-                <td><a href="update_alatmusik.php?id=<?php echo $data['id']; ?>" class="btn-update">Update</a> <!-- Tombol update --></td>
+                <td><?php echo $data['deskripsi']; ?></td>
+                <td><a href="hapus_alatmusik.php?id=<?php echo $data['id']; ?>" class="btn-hapus">Hapus</a></td>
+                <td><a href="update_alatmusik.php?id=<?php echo $data['id']; ?>" class="btn-update">Update</a></td>
             </tr>
             <?php } ?>
         </table>
-        <br>
-        <br>
-    <a href="../index.php" class="btn">Log Out</a>
+        <br><br>
     </section>
-    
 
     <script src="main.js"></script>
 </body>

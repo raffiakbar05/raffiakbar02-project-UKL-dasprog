@@ -1,98 +1,158 @@
-<style>
-      body {
-        font-family: 'Poppins', sans-serif;
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
+body {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-      .navbar {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 20px;
-        background-color: #333;
-      }
+:root {
+  --primary: #d27a3f;
+  --bg: #2e2d2c;
+}
 
-      .navbar-logo {
-        color: #fff;
-        font-size: 24px;
-        text-decoration: none;
-      }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+  border: none;
+  text-decoration: none;
+}
 
-      .navbar-logo span {
-        color: #f39c12;
-      }
+html {
+  scroll-behavior: smooth;
+}
 
-      .navbar-nav a {
-        color: #fff;
-        margin-left: 20px;
-        text-decoration: none;
-      }
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: var(--bg);
+  color: #f4f4f4;
+}
 
-      .navbar-extra a {
-        color: #fff;
-        margin-left: 20px;
-        text-decoration: none;
-      }
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.4rem 7%;
+  background-color: rgba(0, 0, 0, 0.8);
+  border-bottom: 1px solid #b16921;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+}
 
-      .menu {
-        padding: 50px 20px;
-        background-color:#302c2c ;
-        text-align: center;
-      }
+.navbar .navbar-logo {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #fff;
+  font-style: italic;
+}
 
-      .menu h2 {
-        font-size: 36px;
-        margin-bottom: 20px;
-      }
+.navbar .navbar-logo span {
+  color: var(--primary);
+}
 
-      .menu span {
-        color: #f39c12;
-      }
+.navbar .navbar-nav a {
+  color: #fff;
+  display: inline-block;
+  font-size: 1.1rem;
+  margin: 0 1rem;
+}
 
-      .row2 {
-        display: flex;
-        justify-content: center;
-        flex-wrap: wrap;
-      }
+.navbar .navbar-nav a:hover {
+  color: var(--primary);
+}
 
-      .menu-card {
-        background-color: #fff;
-        border-radius: 10px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        margin: 20px;
-        max-width: 300px;
-        overflow: hidden;
-        text-align: left;
-      }
+.navbar .navbar-nav a::after {
+  content: " ";
+  display: block;
+  padding-bottom: 0.5rem;
+  border-bottom: 0.1rem solid var(--primary);
+  transform: scaleX(0);
+  transition: 0.2s linear;
+}
 
-      .menu-card img {
-        width: 100%;
-        height: auto;
-      }
+.navbar .navbar-nav a:hover::after {
+  transform: scaleX(0.5);
+}
 
-      .menu-card-title {
-        padding: 20px;
-        font-size: 16px;
-        color: #333;
-      }
+.navbar .navbar-extra a {
+  color: #ff0000;
+  margin: 0 0.5rem;
+}
 
-      footer {
-        background-color: #333;
-        color: #fff;
-        text-align: center;
-        padding: 20px 0;
-      }
+.navbar .navbar-extra a:hover {
+  color: var(--primary);
+}
 
-      footer .links a {
-        color: #f39c12;
-        margin: 0 10px;
-        text-decoration: none;
-      }
+.menu {
+  padding: 50px 20px;
+  background-color: #f4f4f4;
+  text-align: center;
+}
 
-      footer .credit a {
-        color: #f39c12;
-        text-decoration: none;
-      }
-    </style>
+.menu h2 {
+  font-size: 36px;
+  margin-bottom: 20px;
+  color: #FF8C00;
+}
+
+.menu span {
+  color: #FF8C00;
+}
+
+.row2 {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.menu-card {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  width: 300px; /* Ukuran lebih besar untuk lebar box */
+  height: 400px; /* Ukuran lebih besar untuk tinggi box */
+  overflow: hidden;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between; /* Untuk merenggangkan isi kotak */
+}
+
+.menu-card img {
+  width: 100%; /* Lebar penuh dari elemen induk */
+  height: 200px; /* Tinggi tetap untuk gambar */
+  object-fit: cover; /* Memastikan gambar tetap proporsional dan mengisi area yang ditentukan */
+}
+
+.menu-card-title {
+  padding: 20px;
+  font-size: 16px;
+  color: #333;
+  text-align: center;
+  flex-grow: 1; /* Membuat elemen deskripsi fleksibel dan mengisi ruang yang tersedia */
+  overflow: auto; /* Menambahkan scrollbar jika teks terlalu panjang */
+}
+
+footer {
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 20px 0;
+}
+
+footer .links a {
+  color: #f39c12;
+  margin: 0 10px;
+  text-decoration: none;
+}
+
+footer .credit a {
+  color: #f39c12;
+  text-decoration: none;
+}

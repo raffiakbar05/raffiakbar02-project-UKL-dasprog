@@ -1,3 +1,10 @@
+<?php
+session_start();
+if (!isset($_SESSION['username']) || $_SESSION['level'] != "admin") {
+    header("Location: ../login.php");
+    exit();
+} ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,56 +15,57 @@
     <link rel="stylesheet" href="styleadmin.css">
 </head>
 <body>
-    <div class="navbar">
-        <a href="user.php">user</a>
-        <a href="pakaian_adat.php">Pakaian adat</a>
+<div class="navbar">
+        <a href="user.php">User</a>
+        <a href="pakaian_adat.php">Pakaian Adat</a>
         <a href="tarian.php">Tarian</a>
-        <a href="alat_musik.php">Alat musik</a>
-        <a href="halaman_masukan.php">Masukan</a>
-</div>
+        <a href="alat_musik.php">Alat Musik</a>
+        <a href="sewa.php">Sewa</a>
+    </div>
         
     <section class="user">
-    <h1 class="heading">Data Tarian Adat</h1>
-    <br>
-        <a href="tambah_tarian.php" class="btn">Tambah data</a>
-        <br>
-        <br>
+        <h1 class="heading">Data Tarian Adat</h1>
+
+    <div class="button-container">
+        <a href="tambah_tarian.php" class="btn tambah-user">Tambah Tarian</a>
+        <a href="../index.php" class="btn logout">Log Out</a>
+    </div>
+<br>
         <table border="1" class="table">
             <tr>
                 <th>Nomer</th>
-                <th>id_tarian</th>
-                <th>nama_tarian</th>
-                <th>jenis_tarian</th>
-                <th>asal_tarian</th>
-                <th>aksesoris_tarian</th>
+                <th>Nama Tarian</th>
+                <th>Gambar</th>
+                <th>Kota</th>
+                <th>Jenis Tarian</th>
+                <th>Deskripsi</th>
                 <th>Aksi</th>
                 <th>Aksi</th>
-
             </tr>
             <?php
             include '../koneksi.php';
-            $query_mysql = mysqli_query($mysqli, "SELECT * FROM tarian_adat") or die(mysqli_error($mysqli));
+            $query_mysql = mysqli_query($mysqli, "SELECT tarian_adat.*, daerah.kota 
+                                                  FROM tarian_adat 
+                                                  JOIN daerah ON tarian_adat.id_daerah = daerah.id_daerah") 
+                                                  or die(mysqli_error($mysqli));
             $nomor = 1;
             while($data = mysqli_fetch_array($query_mysql)) { 
             ?>
             <tr>
                 <td><?php echo $nomor++; ?></td>
-                <td><?php echo $data['id']; ?></td>
                 <td><?php echo $data['nama_tarian']; ?></td>
+                <td><img src="uploaded_img/<?php echo $data['gambar']; ?>" alt="" width="100"></td>
+                <td><?php echo $data['kota']; ?></td>
                 <td><?php echo $data['jenis_tarian']; ?></td>
-                <td><?php echo $data['asal_tarian']; ?></td>
-                <td><?php echo $data['aksesoris_tarian']; ?></td>
-                <td><a href="hapus_tarian.php?id=<?php echo $data['id']; ?>" class="btn-hapus">Hapus</a> <!-- Tombol hapus --></td>
-                <td><a href="update_tarian.php?id=<?php echo $data['id']; ?>" class="btn-update">Update</a> <!-- Tombol update --></td>
+                <td><?php echo $data['deskripsi']; ?></td>
+                <td><a href="hapus_tarian.php?id=<?php echo $data['id_tarian']; ?>" class="btn-hapus">Hapus</a></td>
+                <td><a href="update_tarian.php?id=<?php echo $data['id_tarian']; ?>" class="btn-update">Update</a></td>
             </tr>
             <?php } ?>
         </table>
-        <br>
-        <br>
-    <a href="../index.php" class="btn">Log Out</a>
+        <br><br>
     </section>
     
-
     <script src="main.js"></script>
 </body>
 </html>

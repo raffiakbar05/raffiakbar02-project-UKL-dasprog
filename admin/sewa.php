@@ -24,44 +24,42 @@ if (!isset($_SESSION['username']) || $_SESSION['level'] != "admin") {
 </div>
         
     <section class="user">
-    <h1 class="heading">Data User</h1>
-
- <div class="button-container">
-    <a href="../register.php" class="btn">Tambah User</a>
-    <a href="../index.php" class="btn logout">Log Out</a>
-</div>
-
+    <h1 class="heading">Data Sewa Pakaian</h1>
+    <br>
+        <a href="../index.php" class="btn">Log Out</a>
+        <br>
         <br>
         <table border="1" class="table">
             <tr>
                 <th>Nomer</th>
                 <th>Username</th>
-                <th>Password</th>
-                <th>Email</th>
-                <th>Level</th>
-                <th>Action</th> <!-- Membuat kolom data user -->
-                <th>Action</th> <!-- Membuat kolom  data user-->
+                <th>Nama Pakaian</th>
+                <th>Waktu</th>
+                <th>Jumlah</th>
+                <th>Aksi</th>
             </tr>
             <?php
             include '../koneksi.php';
-            $query_mysql = mysqli_query($mysqli, "SELECT * FROM user") or die(mysqli_error($mysqli));
+            $query_mysql = mysqli_query($mysqli, "SELECT transaksi.*, user.username, pakaian_adat.nama_pakaian 
+                                                  FROM transaksi 
+                                                  JOIN user ON transaksi.id_user = user.id_user 
+                                                  JOIN pakaian_adat ON transaksi.id_pakaian = pakaian_adat.id_pakaian") 
+                                                  or die(mysqli_error($mysqli));
             $nomor = 1;
             while($data = mysqli_fetch_array($query_mysql)) { 
             ?>
             <tr>
                 <td><?php echo $nomor++; ?></td>
                 <td><?php echo $data['username']; ?></td>
-                <td><?php echo $data['password']; ?></td>
-                <td><?php echo $data['email']; ?></td>
-                <td><?php echo $data['level']; ?></td>
-                <td><a href="hapususer.php?id=<?php echo $data['id_user']; ?>" class="btn-hapus">Hapus</a> <!-- Tombol hapus --></td>
-                <td><a href="updateuser.php?id=<?php echo $data['id_user']; ?>" class="btn-update">Update</a> <!-- Tombol update --></td>
+                <td><?php echo $data['nama_pakaian']; ?></td>
+                <td><?php echo $data['waktu']; ?></td>
+                <td><?php echo $data['jumlah']; ?></td>
+                <td><a href="hapus_sewa.php?id=<?php echo $data['id']; ?>" class="btn-hapus">Hapus</a></td>
             </tr>
             <?php } ?>
         </table>
         <br>
         <br>
-   
     </section>
     
 

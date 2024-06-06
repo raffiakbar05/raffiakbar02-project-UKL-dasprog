@@ -90,3 +90,24 @@ body {
     background-color: #ddd;
     color: black;
 }
+
+.button-container {
+    overflow: auto; /* Menambahkan clearfix untuk container */
+}
+
+.tambah-user {
+    float: left;
+}
+
+.logout {
+    float: right;
+}
+
+.btn {
+    padding: 10px 20px;
+    text-decoration: none;
+    color: white;
+    background-color: rgb(18, 154, 50);
+    border-radius: 5px;
+    margin: 5px;
+}

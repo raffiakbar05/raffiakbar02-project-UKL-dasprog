@@ -1,0 +1,106 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 80%;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.detail-pakaian, .form-transaksi {
+    margin-bottom: 30px;
+}
+
+.detail-card {
+    display: flex;
+    flex-direction: row;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.detail-card img {
+    width: 200px;
+    height: auto;
+}
+
+.detail-info {
+    padding: 20px;
+    flex: 1;
+}
+
+.detail-info h3 {
+    margin-top: 0;
+    color: #333;
+}
+
+.detail-info p {
+    color: #666;
+    margin: 10px 0;
+}
+
+form label {
+    display: block;
+    margin: 10px 0 5px;
+    color: #333;
+}
+
+form input[type="text"],
+form input[type="datetime-local"],
+form input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+form .button {
+    width: 100%;
+    padding: 10px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+form .button:hover {
+    background-color: #555;
+}
+
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
+        padding: 10px;
+    }
+
+    .detail-card {
+        flex-direction: column;
+    }
+
+    .detail-card img {
+        width: 100%;
+    }
+
+    .detail-info {
+        padding: 10px;
+    }
+}

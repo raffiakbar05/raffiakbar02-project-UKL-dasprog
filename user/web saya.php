@@ -1,3 +1,11 @@
+<?php
+session_start();
+if (!isset($_SESSION['username']) || $_SESSION['level'] != "user") {
+    header("Location: ../login.php");
+    exit();
+} ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -30,7 +38,7 @@
         <a href="pakaian adat.php">Pakaian Adat</a>
         <a href="tarian adat.php">Tarian</a>
         <a href="alat musik.php">Alat musik</a>
-        <a href="proses_masukan.php">Masukan</a>
+        <a href="profil.php">Profil</a>
       </div>
 
      
@@ -40,8 +48,8 @@
     <!-- Hero Section start -->
     <section class="hero" id="home">
       <main class="content">
-        <h1>Apa saja yang kamu ketahui tentang Sosial Budaya di <span>Jawa timur</span></h1>
-        <a href="pakaian adat.php" class="cta">Lets Go</a>
+        <h1>Keberagaman <span>Sosial Budaya</span></h1>
+        <a href="pakaian adat.php" class="cta">:)</a>
       </main>
     </section>
     <!-- Hero Section end -->
@@ -49,14 +57,6 @@
 
     <!-- Footer start -->
     <footer>
-
-      <div class="links">
-        <a href="web saya.php">Home</a>
-        <a href="pakaian adat.php">Pakaian Adat</a>
-        <a href="tarian adat.php">Tarian</a>
-        <a href="alat musik.php">Alat Musik</a>
-        <a href="proses_masukan.php">Masukan</a>
-      </div>
 
       <div class="credit">
         <p>Created by <a href="">Raffi Akbar</a>. | &copy; 2023.</p>

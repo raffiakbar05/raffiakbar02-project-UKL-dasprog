@@ -1,39 +1,60 @@
 <?php
 include '../koneksi.php';
 
-if(isset($_POST['update'])) {
-    $id = $_POST['id'];
-    $nama= $_POST['nama'];
-    $jenis = $_POST['jenis'];
-    $asal = $_POST['asal'];
-    $aksesoris = $_POST['aksesoris'];
+if (isset($_POST['update'])) {
+    $id = mysqli_real_escape_string($mysqli, $_POST['id']);
+    $id_tarian = mysqli_real_escape_string($mysqli, $_POST['id_tarian']);
+    $id_daerah = mysqli_real_escape_string($mysqli, $_POST['id_daerah']);
+    $nama = mysqli_real_escape_string($mysqli, $_POST['nama']);
+    $jenis = mysqli_real_escape_string($mysqli, $_POST['jenis']);
+    $deskripsi = mysqli_real_escape_string($mysqli, $_POST['deskripsi']);
 
-    // Lakukan proses update data di database
-    $query = "UPDATE alat_musik SET nama='$nama', jenis='$jenis', asal='$asal', aksesoris='$aksesoris' WHERE id=$id";
+    // Penanganan file gambar
+    if (isset($_FILES['gambar']['name']) && $_FILES['gambar']['name'] != "") {
+        $gambar = mysqli_real_escape_string($mysqli, $_FILES['gambar']['name']);
+        $gambar_tmp_nama = $_FILES['gambar']['tmp_name'];
+        $gambar_folder = 'uploaded_img/' . $gambar;
+
+        if (!file_exists('uploaded_img/')) {
+            mkdir('uploaded_img/', 0777, true);
+        }
+
+        // Pindahkan file gambar ke folder tujuan
+        if (move_uploaded_file($gambar_tmp_nama, $gambar_folder)) {
+            // Update data termasuk gambar
+            $query = "UPDATE alat_musik SET nama='$nama', id_tarian='$id_tarian',id_daerah='$id_daerah', gambar='$gambar', jenis='$jenis', deskripsi='$deskripsi' WHERE id=$id";
+        } else {
+            echo "Gagal mengunggah gambar.";
+            exit();
+        }
+    } else {
+        // Update data tanpa mengubah gambar
+        $query = "UPDATE alat_musik SET nama='$nama', id_tarian='$id_tarian',id_daerah='$id_daerah', jenis='$jenis', deskripsi='$deskripsi' WHERE id=$id";
+    }
+
     $result = mysqli_query($mysqli, $query);
 
-    if($result) {
+    if ($result) {
         echo "Data berhasil diperbarui.";
-        header("Location: alat_musik.php"); // Redirect kembali ke halaman data user
+        header("Location: alat_musik.php"); // Redirect kembali ke halaman data alat musik
         exit();
     } else {
         echo "Terjadi kesalahan: " . mysqli_error($mysqli);
     }
 }
 
-// Mendapatkan data user yang akan diupdate
-if(isset($_GET['id'])) {
-    $id = $_GET['id'];
+// Mendapatkan data alat musik yang akan diupdate
+if (isset($_GET['id'])) {
+    $id = mysqli_real_escape_string($mysqli, $_GET['id']);
 
     $query = "SELECT * FROM alat_musik WHERE id=$id";
-
     $result = $mysqli->query($query);
 
-    if($result && $result->num_rows > 0) {
+    if ($result && $result->num_rows > 0) {
         $data = $result->fetch_assoc();
-        var_dump($data);
     } else {
         echo "Data alat musik tidak ditemukan.";
+        exit();
     }
 } else {
     echo "ID alat musik tidak ditemukan.";
@@ -41,7 +62,7 @@ if(isset($_GET['id'])) {
 }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -51,29 +72,95 @@ if(isset($_GET['id'])) {
 </head>
 <body>
 <div class="container">
-        <header>
-            <h1 class="title">Update Alat Musik</h1>
-        </header>
-        <section class="form">
-        <form method="POST" action="">
-        <input type="hidden" name="id" value="<?php echo $data['id']; ?>">
+    <header>
+        <h1 class="title">Update Alat Musik</h1>
+    </header>
+    <section class="form">
+        <form method="POST" action="" enctype="multipart/form-data">
+            <input type="hidden" name="id" value="<?php echo $data['id']; ?>">
 
-        <label for="nama">Nama </label><br>
-        <input type="text" id="nama" name="nama" value="<?php echo $data['nama']; ?>"><br>
+            <label for="nama">Nama </label><br>
+            <input type="text" id="nama" name="nama" value="<?php echo $data['nama']; ?>"><br>
 
-        <label for="jenis">Jenis</label><br>
-        <input type="text" id="jenis" name="jenis" value="<?php echo $data['jenis']; ?>"><br>
+            <label for="id_tarian">Tarian Yang Diiringi </label><br>
+            <select name="id_tarian" id="id_tarian" required>
+                <option disabled selected>Pilih</option>
+                <?php
+                // Koneksi ke database
+                $databaseHost = "localhost";
+                $databaseName = "budaya";
+                $databaseUsername = "root";
+                $databasePassword = "";
 
-        <label for="asal">Asal</label><br>
-        <input type="text" id="asal" name="asal" value="<?php echo $data['asal']; ?>"><br>
+                $mysqli = mysqli_connect($databaseHost, $databaseUsername, $databasePassword, $databaseName);
 
-        <label for="aksesoris">Aksesoris </label><br>
-        <input type="text" id="aksesoris" name="aksesoris" value="<?php echo $data['aksesoris']; ?>"><br>
+                // Periksa koneksi
+                if (mysqli_connect_errno()) {
+                    echo "Gagal terhubung ke MySQL: " . mysqli_connect_error();
+                    exit();
+                }
 
-        <input type="submit" name="update" value="Update" class="button">
-    </form>
-        </section>
-    </div>
-    
+                // Query untuk mendapatkan data provinsi dan kota dari tabel daerah
+                $query = "SELECT * FROM tarian_adat";
+                $result = mysqli_query($mysqli, $query);
+
+                // Buat elemen select untuk provinsi dan kota
+                while ($row = mysqli_fetch_assoc($result)) {
+                    echo '<option value="' . $row['id_tarian'] . '">' . $row['nama_tarian'] . '</option>';
+                }
+
+                // Tutup koneksi
+                mysqli_close($mysqli);
+                ?>
+            </select>
+            <br>
+
+            <label for="gambar">Gambar </label><br>
+            <input type="file" id="gambar" name="gambar"><br>
+
+            <label for="id_daerah">Kota </label><br>
+            <select name="id_daerah" id="id_daerah" required>
+                <option disabled selected>Pilih</option>
+                <?php
+                // Koneksi ke database
+                $databaseHost = "localhost";
+                $databaseName = "budaya";
+                $databaseUsername = "root";
+                $databasePassword = "";
+
+                $mysqli = mysqli_connect($databaseHost, $databaseUsername, $databasePassword, $databaseName);
+
+                // Periksa koneksi
+                if (mysqli_connect_errno()) {
+                    echo "Gagal terhubung ke MySQL: " . mysqli_connect_error();
+                    exit();
+                }
+
+                // Query untuk mendapatkan data provinsi dan kota dari tabel daerah
+                $query = "SELECT * FROM daerah";
+                $result = mysqli_query($mysqli, $query);
+
+                // Buat elemen select untuk provinsi dan kota
+                while ($row = mysqli_fetch_assoc($result)) {
+                    echo '<option value="' . $row['id_daerah'] . '">' . $row['kota'] . '</option>';
+                }
+
+                // Tutup koneksi
+                mysqli_close($mysqli);
+                ?>
+            </select>
+            <br>
+
+            <label for="jenis">Jenis</label><br>
+            <input type="text" id="jenis" name="jenis" value="<?php echo $data['jenis']; ?>"><br>
+
+            <label for="deskripsi">Deskripsi </label><br>
+            <input type="text" id="deskripsi" name="deskripsi" value="<?php echo $data['deskripsi']; ?>"><br>
+
+            <input type="submit" name="update" value="Update" class="button">
+        </form>
+    </section>
+</div>
+
 </body>
 </html>

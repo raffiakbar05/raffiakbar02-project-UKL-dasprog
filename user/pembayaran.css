@@ -1,0 +1,76 @@
+:root {
+    --primary: #d27a3f;
+    --bg: #2e2d2c;
+    --light-bg: #bd850b; /* Background form menjadi putih */
+    --text-light: #f4f4f4;
+    --text-dark: #333;
+    --submit-bg: #28a745; /* Warna hijau untuk tombol submit */
+    --submit-hover-bg: #218838; /* Warna hijau lebih gelap untuk hover */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: none;
+    border: none;
+    text-decoration: none;
+}
+
+body {
+    font-family: "Poppins", sans-serif;
+    background-color: var(--bg);
+    color: var(--text-light);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    padding: 20px;
+}
+
+h1 {
+    margin-bottom: 20px;
+    color: var(--primary);
+}
+
+form {
+    background-color: var(--light-bg); /* Background form menjadi putih */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    width: 100%;
+    max-width: 500px;
+    border: 2px solid #fff; /* Border putih */
+}
+
+label {
+    margin-bottom: 5px;
+    display: block;
+    color: var(--text-dark); /* Warna teks menjadi lebih gelap untuk kontras */
+}
+
+/* Style untuk pesan */
+p {
+    background-color: var(--primary);
+    color: var(--text-light);
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    margin-bottom: 20px;
+}
+
+/* Style untuk tombol submit */
+input[type="submit"] {
+    background-color: var(--submit-bg); /* Warna hijau */
+    color: var(--text-light);
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover {
+    background-color: var(--submit-hover-bg); /* Warna hijau lebih gelap saat hover */
+}
